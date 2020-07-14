@@ -962,6 +962,61 @@ func (d *Schema) parseSchema(documentNode interface{}, currentSchema *subSchema)
 		}
 	}
 
+	keys := map[string]struct{}{
+		KEY_SCHEMA: {},
+		KEY_ID: {},
+		KEY_ID_NEW: {},
+		KEY_REF: {},
+		KEY_TITLE: {},
+		KEY_DESCRIPTION: {},
+		KEY_TYPE: {},
+		KEY_ITEMS: {},
+		KEY_ADDITIONAL_ITEMS: {},
+		KEY_PROPERTIES: {},
+		KEY_PATTERN_PROPERTIES: {},
+		KEY_ADDITIONAL_PROPERTIES: {},
+		KEY_PROPERTY_NAMES: {},
+		KEY_DEFINITIONS: {},
+		KEY_MULTIPLE_OF: {},
+		KEY_MINIMUM: {},
+		KEY_MAXIMUM: {},
+		KEY_EXCLUSIVE_MINIMUM: {},
+		KEY_EXCLUSIVE_MAXIMUM: {},
+		KEY_MIN_LENGTH: {},
+		KEY_MAX_LENGTH: {},
+		KEY_PATTERN: {},
+		KEY_FORMAT: {},
+		KEY_MIN_PROPERTIES: {},
+		KEY_MAX_PROPERTIES: {},
+		KEY_DEPENDENCIES: {},
+		KEY_REQUIRED: {},
+		KEY_MIN_ITEMS: {},
+		KEY_MAX_ITEMS: {},
+		KEY_UNIQUE_ITEMS: {},
+		KEY_CONTAINS: {},
+		KEY_CONST: {},
+		KEY_ENUM: {},
+		KEY_ONE_OF: {},
+		KEY_ANY_OF: {},
+		KEY_ALL_OF: {},
+		KEY_NOT: {},
+		KEY_IF: {},
+		KEY_THEN: {},
+		KEY_ELSE: {},
+
+	}
+
+	extras := make(map[string]interface{})
+	for k, v := range m {
+		if _, ok := keys[k]; ok {
+			continue
+		}
+
+		extras[k] = v
+	}
+
+	currentSchema.extras = extras
+
 	return nil
 }
 
@@ -1080,7 +1135,6 @@ func (d *Schema) parseDependencies(documentNode interface{}, currentSchema *subS
 				},
 			))
 		}
-
 	}
 
 	return nil

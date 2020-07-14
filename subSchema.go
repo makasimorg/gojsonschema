@@ -146,4 +146,6 @@ type subSchema struct {
 	_if   *subSchema // if/else are golang keywords
 	_then *subSchema
 	_else *subSchema
+
+	extras map[string]interface{}
 }
