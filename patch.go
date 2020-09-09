@@ -24,6 +24,7 @@ type SubSchema interface {
 	ItemsChildren() []SubSchema
 	ItemsChildrenIsSingleSchema() bool
 	PropertiesChildren() []SubSchema
+	PatternProperties() map[string]SubSchema
 	Required() []string
 	Const() string
 	Enum() []string
