@@ -35,6 +35,7 @@ type SubSchema interface {
 	ExtraString(n string) (string, bool)
 	ExtraBool(n string) (bool, bool)
 }
+
 func (s *subSchema) Draft() *Draft {
 	return s.draft
 }
@@ -43,7 +44,7 @@ func (s *subSchema) ID() *gojsonreference.JsonReference {
 	return s.id
 }
 
-func (s *subSchema) Title() string{
+func (s *subSchema) Title() string {
 	if s.title == nil {
 		return ""
 	}
@@ -51,7 +52,7 @@ func (s *subSchema) Title() string{
 	return *s.title
 }
 
-func (s *subSchema) Description() string{
+func (s *subSchema) Description() string {
 	if s.description == nil {
 		return ""
 	}
@@ -98,6 +99,15 @@ func (s *subSchema) PropertiesChildren() []SubSchema {
 	items := make([]SubSchema, 0, len(s.propertiesChildren))
 	for _, i := range s.propertiesChildren {
 		items = append(items, i)
+	}
+
+	return items
+}
+
+func (s *subSchema) PatternProperties() map[string]SubSchema {
+	items := make(map[string]SubSchema)
+	for k, i := range s.patternProperties {
+		items[k] = i
 	}
 
 	return items
